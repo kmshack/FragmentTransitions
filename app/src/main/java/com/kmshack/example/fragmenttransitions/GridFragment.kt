@@ -1,20 +1,20 @@
 package com.kmshack.example.fragmenttransitions
 
 import android.os.Bundle
-import android.support.transition.ChangeBounds
-import android.support.v4.app.Fragment
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.transition.ChangeBounds
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.view.doOnPreDraw
+import androidx.core.view.doOnPreDraw
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_view.view.*
 
 
-class GridFragment : Fragment() {
+class GridFragment : androidx.fragment.app.Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private var gridCount: Int = 2
@@ -29,7 +29,7 @@ class GridFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val v = inflater!!.inflate(R.layout.fragment_grid, container, false)
+        val v = inflater.inflate(R.layout.fragment_grid, container, false)
         recyclerView = v.findViewById(R.id.recyclerview)
         return v
     }
@@ -39,7 +39,7 @@ class GridFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         postponeEnterTransition()
 
-        recyclerView.layoutManager = GridLayoutManager(activity!!.applicationContext, gridCount)
+        recyclerView.layoutManager = androidx.recyclerview.widget.GridLayoutManager(activity!!.applicationContext, gridCount)
         recyclerView.adapter = Adapter()
 
         recyclerView.doOnPreDraw {
@@ -137,14 +137,14 @@ class GridFragment : Fragment() {
 
         override fun onBindViewHolder(holder: GridViewHolder, position: Int) {
 
-            var h: GridViewHolder = holder!!
-            var imageView: ImageView = h!!.itemView.image
+            val h: GridViewHolder = holder
+            val imageView: ImageView = h.itemView.image
             imageView.transitionName = position.toString()
 
             Picasso.get().load(urls[position]).into(imageView)
         }
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GridViewHolder = GridViewHolder(parent!!)
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GridViewHolder = GridViewHolder(parent)
 
         override fun getItemCount(): Int {
             return urls.size

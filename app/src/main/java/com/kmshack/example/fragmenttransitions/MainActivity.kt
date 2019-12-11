@@ -1,11 +1,11 @@
 package com.kmshack.example.fragmenttransitions
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.RecyclerView
+import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import androidx.view.children
+import androidx.core.view.children
+
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_grid.*
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
                                 val topFragment: Int = supportFragmentManager.fragments.size
                                 val fragment: GridFragment = supportFragmentManager.fragments[topFragment - 1] as GridFragment
 
-                                val recyclerView: RecyclerView = fragment.recyclerview
+                                val recyclerView: androidx.recyclerview.widget.RecyclerView = fragment.recyclerview
 
                                 var viewCount = 0
                                 for (itemView in recyclerView.children) {
